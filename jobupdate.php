@@ -12,6 +12,12 @@ $job_id = $_GET['id'];
 $zone_id = $_GET['zone'];
 $ispaid = $_GET['paid'];
 
+//get date of last clean from job_history
+$lastcleansql = "SELECT * FROM job_history WHERE job_id = " . $job_id;
+$result = $conn->query($lastcleansql);
+$row = $result->fetch_assoc();
+$dateLastDone = $row["dateDone"];
+
 
 //get house number and name to identify job
 $jobdatasql = "SELECT * FROM job WHERE id = " . $job_id;
@@ -21,9 +27,9 @@ $row = $result->fetch_assoc();
 $job_id = $row["id"];
 $house_num = $row["houseNumName"];
 $street_name = $row["streetName"];
-$ispaid = $row["paid"];
+//$ispaid = $row["paid"];
 $price = $row["price"];
-$dateLastDone = $row["dateLastDone"];
+//$dateLastDone = $row["dateLastDone"];
 $zone = $row["zone_id"];
 $dateNextDue = $row["dateNextDue"];
 $job_frequency = $row["frequency"];
@@ -66,7 +72,7 @@ $job_frequency_days = $job_frequency * 7;
 $sql = "UPDATE job SET dateLastDone = NOW() WHERE id = $job_id;
         UPDATE job SET dateNextDue = DATE_ADD(NOW(), INTERVAL $job_frequency_days DAY) WHERE id = $job_id;
         UPDATE job SET paid = 0 WHERE id = $job_id;
-        INSERT INTO job_history (job_id) VALUE ($job_id)";
+        INSERT INTO job_history (job_id, dateDone, paid) VALUES ($job_id, NOW(), 0)";
 
 if ($conn->multi_query($sql) === TRUE) {
 
@@ -99,7 +105,8 @@ $job_frequency_days = $job_frequency * 7;
 
     $sql2 = "UPDATE job SET dateLastDone = NOW() WHERE id = $job_id;
         UPDATE job SET dateNextDue = DATE_ADD(NOW(), INTERVAL $job_frequency_days DAY) WHERE id = $job_id;
-        UPDATE job SET paid = 1 WHERE id = $job_id";
+        UPDATE job SET paid = 1 WHERE id = $job_id;
+        INSERT INTO job_history (job_id, dateDone, paid) VALUES ($job_id, NOW(), 1)";
 
         if ($conn->multi_query($sql2) === TRUE) {
  
