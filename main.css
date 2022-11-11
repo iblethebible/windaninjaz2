@@ -1,0 +1,15 @@
+h1 {text-align: center; }
+body { text-align: center;
+margin: 5%;}
+form { margin-top: 20px;}
+table {margin-top: 10px;}
+button {
+    min-height: 80px;
+    margin: 10px;
+  
+}
+label {
+    display: inline-block;
+    text-align: right;
+}
+
