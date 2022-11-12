@@ -10,7 +10,7 @@ if (!isset($_SESSION['loggedin'])) {
 
 $job_id = $_GET['id'];
 $zone_id = $_GET['zone'];
-$ispaid = $_GET['paid'];
+//$ispaid = $_GET['paid'];
 
 //get date of last clean from job_history
 $lastcleansql = "SELECT * FROM job_history WHERE job_id = " . $job_id;
@@ -151,14 +151,17 @@ else {
  <button onClick="location.href = 'jobadd.php';" class="btn btn-primary" type="button">Add Job</button>
  <button onClick="location.href = 'jobsarea.php' ; " class="btn btn-primary" type="button">Select Zone</button>
  <button onClick="location.href = 'jobs.php' ; " class="btn btn-primary" type="button">All Jobs</button>
- <button onClick="location.href = 'profile.php' ; " class="btn btn-warning" type="button">Profile</button>
 </div>
 
 <h1><?php echo $house_num . " " . $street_name?></h1>
+<a href="jobhistory.php?id=<?php echo $job_id?>">History</a>
 <div class="container">
 <div class="row">
 <div class="col-sm">
-<!--use php echo to create the buttons-->
+
+
+
+<!--echo php strings to create the buttons-->
 <?php
 $jobcompleteunpaid = '<form action="jobupdate.php" method="get"><input type="hidden" name="id" value="'.$job_id.'"><input id ="unpaid-button" class="btn btn-warning "type="submit" name="submit_button" value="JOB COMPLETE/UNPAID">';
 
@@ -171,7 +174,7 @@ $jobcompletepaid = '<form action="jobupdate.php" method="get"><input type="hidde
 </div>
 
 <div class="col-sm">
-    <p><?php echo $isjobpaid . " for clean on " . $dateLastDone?></p>
+
 <table class="table table-hover">
     <tr>
             <th>Last cleaned:</th>
