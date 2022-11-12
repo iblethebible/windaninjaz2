@@ -85,7 +85,7 @@ if ($conn->multi_query($sql) === TRUE) {
     //******** ADD A POP UP MESSAGE CONFIRMING JOB COMPLETION*/
 }
 else {
-    echo "ERROR: " . $conn->error . "</p>";
+    //echo "ERROR: " . $conn->error . "</p>";
 }
 
 }
@@ -119,7 +119,7 @@ $job_frequency_days = $job_frequency * 7;
     
         }
         else {
-            echo "ERROR: " . $conn->error . "</p>";
+           // echo "ERROR: " . $conn->error . "</p>";
         }
 }
 
