@@ -27,20 +27,19 @@ if (!isset($_SESSION['loggedin'])) {
 
 <div class="d-grid gap-3">
  
-  <button onClick="location.href = 'jobadd.php';" class="btn btn-primary" type="button">Add Job</button>
-  <button onclick="location.href = 'profile.php' ; " class="btn btn-warning" type="button">Profile</button>
+  <button onclick="location.href = 'profile.php' ; " class="btn btn-secondary" type="button">Manager Mode</button>
 <div class=container>
 		<div class=row>
             <div class=col-sm id="search">
 		
-		<form action="jobs2.php" method="get">
+		<form action="jobs.php" method="get">
     <input type="text" name="search">
 
     <input type ="submit" name="submit_button" value="Go"/>
 </form>
         </div>
         <div class=col-sm>
-<form action="jobs2.php">
+<form action="jobs.php">
 <label for="zone"></label>
 <select name="zone" id="zone">
 	<option value="1">Bayston Hill</option>
@@ -52,7 +51,7 @@ if (!isset($_SESSION['loggedin'])) {
 	<option value="7">Radbrook</option>
 	<option value="8">Sundorne</option>
 </select>
-<input type="submit" name="submit_button" value="Go">
+<input type="submit" name="submit_button2" value="Go">
 </form>
         </di>
         </div>
@@ -106,7 +105,7 @@ if (isset($_GET['submit_button'])) {
     }
 }
 
-if (isset($_GET['submit_button'])) {
+if (isset($_GET['submit_button2'])) {
 
 
 	$zone_id = $_GET['zone'];
@@ -151,11 +150,6 @@ if (isset($_GET['submit_button'])) {
 	}
 
 
-//$zonename = "SELECT area FROM zone INNER JOIN job ON zone.id = job.zone_id WHERE job.id = $job_id;";
-//$result = $conn->query($zonename);
-//$row = $result->fetch_assoc();
-
-//$areanameprod = $row["area"];
 
 	
 $sql = "SELECT id, houseNumName, streetName, price, frequency, info, dateNextDue, zone_id FROM job ORDER BY dateNextDue ASC";

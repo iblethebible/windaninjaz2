@@ -148,9 +148,7 @@ else {
 
 ?>
 
- <button onClick="location.href = 'jobadd.php';" class="btn btn-primary" type="button">Add Job</button>
- <button onClick="location.href = 'jobsarea.php' ; " class="btn btn-primary" type="button">Select Zone</button>
- <button onClick="location.href = 'jobs.php' ; " class="btn btn-primary" type="button">All Jobs</button>
+<button onClick="location.href = 'jobs.php' ; " class="btn btn-secondary" type="button">Home</button>
 </div>
 
 <h1><?php echo $house_num . " " . $street_name?></h1>
