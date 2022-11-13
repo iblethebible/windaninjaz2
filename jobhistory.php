@@ -65,12 +65,12 @@ $job_id = $row["job_id"];
 //if statement to chec if jobs have been paid and display pay now link if not
 
 if (isset($_GET['submitpaid'])) {
-    $sql = "UPDATE job_history SET paid = 1 WHERE id = $job_history_id;";
-    if ($conn->query($sql) === TRUE) {
+    $sql5 = "UPDATE job_history SET paid = 1 WHERE id = $row[id];";
+    if ($conn->query($sql5) === TRUE) {
         echo '<div class="alert alert-success">
             <strong>Success!</strong> JOB PAID.
           </div>';
-          //header("Refresh: 1; URL=jobhistory.php?id=" . $job_id);
+          header("Refresh: 1; URL=jobhistory.php?id=" . $row["id"]);
     }
     else {
         echo "noo";

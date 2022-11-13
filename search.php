@@ -58,8 +58,8 @@ if (isset($_GET['submit_button'])) {
         //echo '<th>Zone</th>';
         echo '<th>info</th>';
     
-        echo '<th>UPDATE</th>';
-        echo '<th>History</th>';
+        echo '<th>COMPLETE</th>';
+        //echo '<th>EDIT</th>';
         echo '</tr>';
         
         while ($row = $result->fetch_assoc()) {
@@ -73,7 +73,7 @@ if (isset($_GET['submit_button'])) {
             //echo '<td>' . $row["zone_id"] . '</td>';
             echo '<td>' . $row["info"] . '</td>';
             echo '<td><a href="jobupdate.php?id=' . $row["id"] . '">UPDATE</a></td>';
-            echo '<td><a href="jobhistory.php?id=' . $row["id"] . '">History</a></td>';
+            //echo '<td><a href="jobview.php?id=' . $row["id"] . '">EDIT</a></td>';
             echo '</tr>';
         }
         echo '</table>';

@@ -1,7 +1,8 @@
 h1 {text-align: center; }
 body { text-align: center;
 margin: 5%;}
-form { margin-top: 20px;}
+form { margin-top: 20px;
+margin-bottom: 20px;}
 table {margin-top: 10px;}
 button {
     min-height: 80px;
@@ -11,5 +12,8 @@ button {
 label {
     display: inline-block;
     text-align: right;
+}
+.search {
+    margin: 1opx;
 }
 
