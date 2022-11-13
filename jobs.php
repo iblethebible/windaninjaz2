@@ -28,16 +28,35 @@ if (!isset($_SESSION['loggedin'])) {
 <div class="d-grid gap-3">
  
   <button onClick="location.href = 'jobadd.php';" class="btn btn-primary" type="button">Add Job</button>
-  <button onClick="location.href = 'jobsarea.php' ; " class="btn btn-primary" type="button">Select Zone</button>
   <button onclick="location.href = 'profile.php' ; " class="btn btn-warning" type="button">Profile</button>
+<div class=container>
+		<div class=row>
+            <div class=col-sm id="search">
+		
+		<form action="jobs2.php" method="get">
+    <input type="text" name="search">
 
-		</div>
-		<h1>All Jobs</h1>
-		<form action="search.php" method="get">
-    Search <input type="text" name="search"><br>
-    <input type ="submit" name="submit_button">
+    <input type ="submit" name="submit_button" value="Go"/>
 </form>
-
+        </div>
+        <div class=col-sm>
+<form action="jobs2.php">
+<label for="zone"></label>
+<select name="zone" id="zone">
+	<option value="1">Bayston Hill</option>
+	<option value="2">Belle Vue</option>
+	<option value="3">Copthorne</option>
+	<option value="4">Meole</option>
+	<option value="5">Monkmoor</option>
+	<option value="6">Mount Pleasant</option>
+	<option value="7">Radbrook</option>
+	<option value="8">Sundorne</option>
+</select>
+<input type="submit" name="submit_button" value="Go">
+</form>
+        </di>
+        </div>
+        </div>
 
 <?php 
  
@@ -87,7 +106,49 @@ if (isset($_GET['submit_button'])) {
     }
 }
 
+if (isset($_GET['submit_button'])) {
 
+
+	$zone_id = $_GET['zone'];
+		
+	$sql = "SELECT * FROM job WHERE zone_id = $zone_id ORDER BY dateNextDue ASC;";
+	
+	
+	$result = $conn->query($sql);
+	
+	if ($result->num_rows > 0) {
+		echo '<table class="table table-hover">';
+		echo '<tr>';
+		echo '<th>House</th>';
+		echo '<th>Street Name</th>';
+		echo '<th>Price</th>';
+		echo '<th>Frequency</th>';
+		
+		echo '<th><b>Next Due</b></th>';
+		//echo '<th>Zone</th>';
+		echo '<th>info</th>';
+	
+		echo '<th>COMPLETE</th>';
+		//echo '<th>EDIT</th>';
+		echo '</tr>';
+		
+		while ($row = $result->fetch_assoc()) {
+			echo '<tr>';
+			echo '<td>' . $row["houseNumName"] . '</td>';
+			echo '<td>' . $row["streetName"] . '</td>';
+			echo '<td>£' . $row["price"] . '</td>';
+			echo '<td>' . $row["frequency"] . ' Weeks</td>';
+			
+			echo '<td>' . $row["dateNextDue"] . '</td>';
+			//echo '<td>' . $row["zone_id"] . '</td>';
+			echo '<td>' . $row["info"] . '</td>';
+			echo '<td><a href="jobupdate.php?id=' . $row["id"] . '">UPDATE</a></td>';
+			//echo '<td><a href="jobview.php?id=' . $row["id"] . '">EDIT</a></td>';
+			echo '</tr>';
+		}
+		echo '</table>';
+	}
+	}
 
 
 //$zonename = "SELECT area FROM zone INNER JOIN job ON zone.id = job.zone_id WHERE job.id = $job_id;";
